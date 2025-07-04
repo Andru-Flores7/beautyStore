@@ -1,0 +1,18 @@
+.product-img-container {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* Puedes cambiar a 1/1 para cuadrado */
+  overflow: hidden;
+  background: #f8f9fa;
+  border-radius: 0.5rem 0.5rem 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}

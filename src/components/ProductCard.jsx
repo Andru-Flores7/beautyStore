@@ -1,4 +1,6 @@
 import React from 'react'
+import"../assets/css/ProductCard.css"
+import formatPrice from '../utils/formatPrice'
 
 const ProductCard = ({ product, onAddToCart }) => {
     const handleImageError = (e) => {
@@ -7,12 +9,14 @@ const ProductCard = ({ product, onAddToCart }) => {
 
     return (
         <div className="card product-card h-100 fade-in">
-            <img 
-                src={product.image} 
-                className="card-img-top product-image" 
-                alt={product.name}
-                onError={handleImageError}
-            />
+            <div className="product-img-container">
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-img"
+                    onError={handleImageError}
+                />
+            </div>
             <div className="card-body d-flex flex-column">
                 <div className="mb-2">
                     <span className="product-category">{product.category}</span>
@@ -21,10 +25,10 @@ const ProductCard = ({ product, onAddToCart }) => {
                 <p className="card-text text-muted flex-grow-1">{product.description}</p>
                 <div className="mt-auto">
                     <div className="d-flex justify-content-between align-items-center mb-3">
-                        <span className="product-price">${product.price.toFixed(2)}</span>
+                        <span className="product-price">{formatPrice(product.price)}</span>
                     </div>
                     <button 
-                        className="btn btn-gradient w-100"
+                        className="btn btn btn-primary w-100"
                         onClick={() => onAddToCart(product)}
                     >
                         <i className="bi bi-cart-plus me-2"></i>Agregar al Carrito

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useProducts } from '../context/ProductContext'
 import { useCart } from '../context/CartContext'
 import ProductCard from './ProductCard'
@@ -8,29 +8,29 @@ const ProductCatalog = ({ showToast }) => {
     const { addItem } = useCart()
     const [searchQuery, setSearchQuery] = useState('')
     const [filteredProducts, setFilteredProducts] = useState(products)
+    const debounceTimeout = useRef(null)
 
-    React.useEffect(() => {
-        setFilteredProducts(products)
-    }, [products])
-
-    const handleSearch = () => {
+    useEffect(() => {
+        // Búsqueda reactiva desde la primera letra
         const results = searchProducts(searchQuery)
         setFilteredProducts(results)
-        
-        if (searchQuery && results.length === 0) {
-            showToast(`No se encontraron productos para "${searchQuery}"`, 'info')
+
+        // Debounce para el toast
+        if (debounceTimeout.current) clearTimeout(debounceTimeout.current)
+        if (searchQuery) {
+            debounceTimeout.current = setTimeout(() => {
+                if (results.length === 0) {
+                    showToast(`No se encontraron productos para "${searchQuery}"`, 'info')
+                }
+            }, 500)
         }
-    }
+        // Limpieza
+        return () => clearTimeout(debounceTimeout.current)
+    }, [searchQuery, products])
 
     const handleAddToCart = (product) => {
         addItem(product)
         showToast(`${product.name} agregado al carrito`, 'success')
-    }
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleSearch()
-        }
     }
 
     return (
@@ -52,12 +52,11 @@ const ProductCatalog = ({ showToast }) => {
                             placeholder="Buscar productos..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            onKeyPress={handleKeyPress}
                         />
                         <button 
                             className="btn btn-outline-primary search-btn" 
                             type="button"
-                            onClick={handleSearch}
+                            onClick={() => {}} 
                         >
                             <i className="bi bi-search"></i>
                         </button>
@@ -66,7 +65,7 @@ const ProductCatalog = ({ showToast }) => {
             </div>
 
             {/* Products Grid */}
-            <div className="row">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 {filteredProducts.length === 0 ? (
                     <div className="col-12">
                         <div className="empty-state">
@@ -76,7 +75,7 @@ const ProductCatalog = ({ showToast }) => {
                     </div>
                 ) : (
                     filteredProducts.map(product => (
-                        <div key={product.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div key={product.id} className="col">
                             <ProductCard 
                                 product={product} 
                                 onAddToCart={handleAddToCart}

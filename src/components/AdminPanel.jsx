@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useProducts } from '../context/ProductContext'
 import ProductModal from './ProductModal'
+import formatPrice from '../utils/formatPrice'
+import '../assets/css/AdminPanel.css'
 
 const AdminPanel = ({ showToast }) => {
     const { products, deleteProduct } = useProducts()
@@ -57,7 +59,7 @@ const AdminPanel = ({ showToast }) => {
                         </div>
                         <div className="card-body">
                             <div className="table-responsive">
-                                <table className="table table-hover">
+                                <table className="table table-hover align-middle">
                                     <thead className="table-light">
                                         <tr>
                                             <th>Imagen</th>
@@ -93,7 +95,7 @@ const AdminPanel = ({ showToast }) => {
                                                     </td>
                                                     <td>
                                                         <span className="text-primary fw-bold">
-                                                            ${product.price.toFixed(2)}
+                                                            {formatPrice(product.price)}
                                                         </span>
                                                     </td>
                                                     <td>

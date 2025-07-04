@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SuccessModal = ({ show, onHide, orderNumber }) => {
+const SuccessModal = ({ show, onHide }) => {
     if (!show) return null
 
     return (
@@ -18,9 +18,7 @@ const SuccessModal = ({ show, onHide, orderNumber }) => {
                         <p className="lead">
                             Tu pedido ha sido enviado exitosamente. Nos pondremos en contacto contigo pronto.
                         </p>
-                        <div className="alert alert-info mt-3">
-                            <strong>Número de pedido:</strong> {orderNumber}
-                        </div>
+                       
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-success" onClick={onHide}>

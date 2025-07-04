@@ -36,22 +36,27 @@ const CheckoutModal = ({ show, onHide, onSuccess, showToast }) => {
             return
         }
 
-        // Generate order
-        const order = {
-            id: generateOrderId(),
-            customer: formData,
-            items: items,
-            total: getTotal(),
-            date: new Date().toLocaleString()
-        }
+        // Generar mensaje para WhatsApp
+        const telefono = '543884636451'
+        const productos = items.map(item =>
+            `• ${item.product.name} x${item.quantity} - $${(item.product.price * item.quantity).toFixed(2)}`
+        ).join('\n')
+        const total = `$${getTotal().toFixed(2)}`
+        const mensaje =
+            `¡Hola! Quiero hacer un pedido:\n\n` +
+            `*Datos del cliente:*\n` +
+            `Nombre: ${formData.name}\n` +
+            `Teléfono: ${formData.phone}\n` +
+            `Dirección: ${formData.address}\n` +
+            (formData.email ? `Email: ${formData.email}\n` : '') +
+            `\n*Pedido:*\n${productos}\n\n` +
+            `*Total:* ${total}`
 
-        // Save order
-        saveOrder(order)
+        const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`
+        window.open(url, '_blank')
 
-        // Clear cart
+        // Limpia el carrito y el formulario
         clearCart()
-
-        // Reset form
         setFormData({
             name: '',
             phone: '',
@@ -59,8 +64,8 @@ const CheckoutModal = ({ show, onHide, onSuccess, showToast }) => {
             email: ''
         })
 
-        // Call success callback
-        onSuccess(order.id)
+        // Cierra el modal y muestra el de éxito
+        onSuccess()
     }
 
     if (!show) return null

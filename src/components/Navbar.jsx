@@ -1,16 +1,22 @@
 import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 
-const Navbar = ({ currentSection, setCurrentSection, onCartClick }) => {
+const Navbar = ({ onCartClick }) => {
     const { getTotalItems } = useCart()
     const totalItems = getTotalItems()
+    const location = useLocation()
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div className="container">
-                <a className="navbar-brand fw-bold text-primary" href="#">
+                <Link
+                    className="navbar-brand fw-bold text-primary"
+                    to="/"
+                    style={{ cursor: 'pointer' }}
+                >
                     <i className="bi bi-gem me-2"></i>Beauty Store
-                </a>
+                </Link>
                 <button 
                     className="navbar-toggler" 
                     type="button" 
@@ -22,20 +28,20 @@ const Navbar = ({ currentSection, setCurrentSection, onCartClick }) => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
-                            <button 
-                                className={`nav-link btn btn-link ${currentSection === 'catalog' ? 'active' : ''}`}
-                                onClick={() => setCurrentSection('catalog')}
+                            <Link 
+                                className={`nav-link btn btn-link${location.pathname === '/' ? ' active' : ''}`}
+                                to="/"
                             >
                                 Catálogo
-                            </button>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <button 
-                                className={`nav-link btn btn-link ${currentSection === 'admin' ? 'active' : ''}`}
-                                onClick={() => setCurrentSection('admin')}
+                            <Link 
+                                className={`nav-link btn btn-link${location.pathname === '/admin' ? ' active' : ''}`}
+                                to="/admin"
                             >
                                 Administración
-                            </button>
+                            </Link>
                         </li>
                     </ul>
                     <button 

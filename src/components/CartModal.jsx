@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useCart } from '../context/CartContext'
+import '../assets/css/CartModal.css'
+import formatPrice from '../utils/formatPrice'
 
 const CartModal = ({ show, onHide, onCheckout, showToast }) => {
     const { items, updateQuantity, removeItem, getTotal } = useCart()
+
+    // Efecto para blur de fondo
+    useEffect(() => {
+        if (show) {
+            document.body.classList.add('modal-blur-bg')
+        } else {
+            document.body.classList.remove('modal-blur-bg')
+        }
+        return () => document.body.classList.remove('modal-blur-bg')
+    }, [show])
 
     const handleQuantityChange = (productId, newQuantity) => {
         if (newQuantity < 1) return
@@ -57,29 +69,30 @@ const CartModal = ({ show, onHide, onCheckout, showToast }) => {
                                                 <h6 className="mb-1">{item.product.name}</h6>
                                                 <small className="text-muted">{item.product.category}</small>
                                                 <div className="fw-bold text-primary">
-                                                    ${item.product.price.toFixed(2)}
+                                                    {formatPrice(item.product.price)}
                                                 </div>
                                             </div>
                                             <div className="col-3">
-                                                <div className="quantity-controls">
-                                                    <button 
-                                                        className="quantity-btn"
+                                                <div className="quantity-control d-flex align-items-center justify-content-center gap-2">
+                                                    <button
+                                                        className="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                                                        style={{ width: 32, height: 32, padding: 0 }}
                                                         onClick={() => handleQuantityChange(item.product.id, item.quantity - 1)}
+                                                        disabled={item.quantity <= 1}
+                                                        aria-label="Disminuir cantidad"
                                                     >
-                                                        <i className="bi bi-dash"></i>
+                                                        <i className="bi bi-dash fs-5"></i>
                                                     </button>
-                                                    <input 
-                                                        type="number" 
-                                                        className="quantity-input" 
-                                                        value={item.quantity} 
-                                                        min="1"
-                                                        onChange={(e) => handleQuantityChange(item.product.id, parseInt(e.target.value) || 1)}
-                                                    />
-                                                    <button 
-                                                        className="quantity-btn"
+                                                    <span className="mx-2 fs-5 fw-semibold" style={{ minWidth: 32, textAlign: 'center' }}>
+                                                        {item.quantity}
+                                                    </span>
+                                                    <button
+                                                        className="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                                                        style={{ width: 32, height: 32, padding: 0 }}
                                                         onClick={() => handleQuantityChange(item.product.id, item.quantity + 1)}
+                                                        aria-label="Aumentar cantidad"
                                                     >
-                                                        <i className="bi bi-plus"></i>
+                                                        <i className="bi bi-plus fs-5"></i>
                                                     </button>
                                                 </div>
                                                 <button 
@@ -99,7 +112,7 @@ const CartModal = ({ show, onHide, onCheckout, showToast }) => {
                         <div className="w-100">
                             <div className="d-flex justify-content-between align-items-center mb-3">
                                 <h5 className="mb-0">
-                                    Total: <span className="text-primary">${getTotal().toFixed(2)}</span>
+                                    Total: <span className="text-primary">{formatPrice(getTotal())}</span>
                                 </h5>
                                 <button 
                                     className="btn btn-success btn-lg" 
