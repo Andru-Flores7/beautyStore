@@ -3,19 +3,40 @@ import { useProducts } from '../context/ProductContext'
 import { useCart } from '../context/CartContext'
 import ProductCard from './ProductCard'
 
+// Obtiene las categorías únicas de los productos, normalizando espacios y mayúsculas
+const getCategories = (products) => {
+    const map = new Map()
+    products.forEach(p => {
+        if (p.category && p.category.trim()) {
+            // Normaliza para evitar duplicados por mayúsculas/espacios
+            const key = p.category.trim().toLowerCase()
+            if (!map.has(key)) {
+                map.set(key, p.category.trim())
+            }
+        }
+    })
+    return ['Todos', ...Array.from(map.values())]
+}
+
 const ProductCatalog = ({ showToast }) => {
     const { products, searchProducts } = useProducts()
     const { addItem } = useCart()
     const [searchQuery, setSearchQuery] = useState('')
     const [filteredProducts, setFilteredProducts] = useState(products)
+    const [selectedCategory, setSelectedCategory] = useState('Todos')
     const debounceTimeout = useRef(null)
+    const categories = getCategories(products)
 
     useEffect(() => {
-        // Búsqueda reactiva desde la primera letra
-        const results = searchProducts(searchQuery)
+        let results = searchProducts(searchQuery)
+        if (selectedCategory !== 'Todos') {
+            results = results.filter(p =>
+                p.category &&
+                p.category.trim().toLowerCase() === selectedCategory.trim().toLowerCase()
+            )
+        }
         setFilteredProducts(results)
 
-        // Debounce para el toast
         if (debounceTimeout.current) clearTimeout(debounceTimeout.current)
         if (searchQuery) {
             debounceTimeout.current = setTimeout(() => {
@@ -24,9 +45,8 @@ const ProductCatalog = ({ showToast }) => {
                 }
             }, 500)
         }
-        // Limpieza
         return () => clearTimeout(debounceTimeout.current)
-    }, [searchQuery, products])
+    }, [searchQuery, products, selectedCategory])
 
     const handleAddToCart = (product) => {
         addItem(product)
@@ -41,7 +61,22 @@ const ProductCatalog = ({ showToast }) => {
                     <p className="lead text-muted">Descubre nuestra colección exclusiva de productos de belleza</p>
                 </div>
             </div>
-            
+
+            {/* Etiquetas de categorías dinámicas */}
+            <div className="row mb-3">
+                <div className="col-12 d-flex justify-content-center gap-2 flex-wrap">
+                    {categories.map(cat => (
+                        <button
+                            key={cat}
+                            className={`btn btn-sm ${selectedCategory === cat ? 'btn-primary' : 'btn-outline-primary'}`}
+                            onClick={() => setSelectedCategory(cat)}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
             {/* Search and Filter */}
             <div className="row mb-4">
                 <div className="col-md-6 offset-md-3">

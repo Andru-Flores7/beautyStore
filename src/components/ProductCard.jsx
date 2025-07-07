@@ -18,9 +18,7 @@ const ProductCard = ({ product, onAddToCart }) => {
                 />
             </div>
             <div className="card-body d-flex flex-column">
-                <div className="mb-2">
-                    <span className="product-category">{product.category}</span>
-                </div>
+                <span className={`product-category bg-category-${product.category.replace(/\s/g, '').toLowerCase()}`}>{product.category}</span>
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text text-muted flex-grow-1">{product.description}</p>
                 <div className="mt-auto">

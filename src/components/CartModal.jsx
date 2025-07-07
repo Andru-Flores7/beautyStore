@@ -33,94 +33,122 @@ const CartModal = ({ show, onHide, onCheckout, showToast }) => {
     if (!show) return null
 
     return (
-        <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
-            <div className="modal-dialog modal-lg">
-                <div className="modal-content">
-                    <div className="modal-header bg-primary text-white">
-                        <h5 className="modal-title">
-                            <i className="bi bi-cart3 me-2"></i>Carrito de Compras
-                        </h5>
-                        <button 
-                            type="button" 
-                            className="btn-close btn-close-white" 
-                            onClick={onHide}
-                        ></button>
-                    </div>
-                    <div className="modal-body">
-                        {items.length === 0 ? (
-                            <div className="text-center py-4">
-                                <i className="bi bi-cart-x display-1 text-muted"></i>
-                                <p className="lead text-muted mt-3">Tu carrito está vacío</p>
-                            </div>
-                        ) : (
-                            <div>
-                                {items.map(item => (
-                                    <div key={item.product.id} className="cart-item">
-                                        <div className="row align-items-center">
-                                            <div className="col-3">
-                                                <img 
-                                                    src={item.product.image} 
-                                                    alt={item.product.name} 
-                                                    className="img-fluid rounded"
-                                                    onError={handleImageError}
-                                                />
-                                            </div>
-                                            <div className="col-6">
-                                                <h6 className="mb-1">{item.product.name}</h6>
-                                                <small className="text-muted">{item.product.category}</small>
-                                                <div className="fw-bold text-primary">
-                                                    {formatPrice(item.product.price)}
+        <div
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                zIndex: 1040,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'rgba(0,0,0,0.5)'
+            }}
+            onClick={onHide}
+        >
+            <div
+                className="modal fade show"
+                style={{
+                    display: 'block',
+                    zIndex: 1050,
+                    position: 'relative',
+                    margin: '2rem auto',
+                    maxWidth: '700px',
+                    width: '100%'
+                }}
+                tabIndex="-1"
+                onClick={e => e.stopPropagation()}
+            >
+                <div className="modal-dialog modal-lg" style={{ margin: 0 }}>
+                    <div className="modal-content">
+                        <div className="modal-header bg-primary text-white">
+                            <h5 className="modal-title">
+                                <i className="bi bi-cart3 me-2"></i>Carrito de Compras
+                            </h5>
+                            <button 
+                                type="button" 
+                                className="btn-close btn-close-white" 
+                                onClick={onHide}
+                            ></button>
+                        </div>
+                        <div className="modal-body">
+                            {items.length === 0 ? (
+                                <div className="text-center py-4">
+                                    <i className="bi bi-cart-x display-1 text-muted"></i>
+                                    <p className="lead text-muted mt-3">Tu carrito está vacío</p>
+                                </div>
+                            ) : (
+                                <div>
+                                    {items.map(item => (
+                                        <div key={item.product.id} className="cart-item">
+                                            <div className="row align-items-center">
+                                                <div className="col-3">
+                                                    <img 
+                                                        src={item.product.image} 
+                                                        alt={item.product.name} 
+                                                        className="img-fluid rounded"
+                                                        onError={handleImageError}
+                                                    />
                                                 </div>
-                                            </div>
-                                            <div className="col-3">
-                                                <div className="quantity-control d-flex align-items-center justify-content-center gap-2">
-                                                    <button
-                                                        className="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center"
-                                                        style={{ width: 32, height: 32, padding: 0 }}
-                                                        onClick={() => handleQuantityChange(item.product.id, item.quantity - 1)}
-                                                        disabled={item.quantity <= 1}
-                                                        aria-label="Disminuir cantidad"
+                                                <div className="col-6">
+                                                    <h6 className="mb-1">{item.product.name}</h6>
+                                                    {/* <small className="text-muted">{item.product.category}</small> */}
+                                                    <div className="fw-bold text-primary">
+                                                        {formatPrice(item.product.price)}
+                                                    </div>
+                                                </div>
+                                                <div className="col-3">
+                                                    <div className="quantity-control d-flex align-items-center justify-content-center gap-2">
+                                                        <button
+                                                            className="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                                                            style={{ width: 32, height: 32, padding: 0 }}
+                                                            onClick={() => handleQuantityChange(item.product.id, item.quantity - 1)}
+                                                            disabled={item.quantity <= 1}
+                                                            aria-label="Disminuir cantidad"
+                                                        >
+                                                            <i className="bi bi-dash fs-5"></i>
+                                                        </button>
+                                                        <span className="mx-2 fs-5 fw-semibold" style={{ minWidth: 32, textAlign: 'center' }}>
+                                                            {item.quantity}
+                                                        </span>
+                                                        <button
+                                                            className="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                                                            style={{ width: 32, height: 32, padding: 0 }}
+                                                            onClick={() => handleQuantityChange(item.product.id, item.quantity + 1)}
+                                                            aria-label="Aumentar cantidad"
+                                                        >
+                                                            <i className="bi bi-plus fs-5"></i>
+                                                        </button>
+                                                    </div>
+                                                    <button 
+                                                        className="btn btn-sm btn-outline-danger mt-2 w-100"
+                                                        onClick={() => handleRemoveItem(item.product.id, item.product.name)}
                                                     >
-                                                        <i className="bi bi-dash fs-5"></i>
-                                                    </button>
-                                                    <span className="mx-2 fs-5 fw-semibold" style={{ minWidth: 32, textAlign: 'center' }}>
-                                                        {item.quantity}
-                                                    </span>
-                                                    <button
-                                                        className="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center"
-                                                        style={{ width: 32, height: 32, padding: 0 }}
-                                                        onClick={() => handleQuantityChange(item.product.id, item.quantity + 1)}
-                                                        aria-label="Aumentar cantidad"
-                                                    >
-                                                        <i className="bi bi-plus fs-5"></i>
+                                                        <i className="bi bi-trash"></i>
                                                     </button>
                                                 </div>
-                                                <button 
-                                                    className="btn btn-sm btn-outline-danger mt-2 w-100"
-                                                    onClick={() => handleRemoveItem(item.product.id, item.product.name)}
-                                                >
-                                                    <i className="bi bi-trash"></i>
-                                                </button>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                    <div className="modal-footer">
-                        <div className="w-100">
-                            <div className="d-flex justify-content-between align-items-center mb-3">
-                                <h5 className="mb-0">
-                                    Total: <span className="text-primary">{formatPrice(getTotal())}</span>
-                                </h5>
-                                <button 
-                                    className="btn btn-success btn-lg" 
-                                    disabled={items.length === 0}
-                                    onClick={onCheckout}
-                                >
-                                    <i className="bi bi-credit-card me-2"></i>Finalizar Compra
-                                </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        <div className="modal-footer">
+                            <div className="w-100">
+                                <div className="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 className="mb-0">
+                                        Total: <span className="text-primary">{formatPrice(getTotal())}</span>
+                                    </h5>
+                                    <button 
+                                        className="btn btn-success btn-lg" 
+                                        disabled={items.length === 0}
+                                        onClick={onCheckout}
+                                    >
+                                        <i className="bi bi-credit-card me-2"></i>Finalizar Compra
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -35,14 +35,7 @@ const Navbar = ({ onCartClick }) => {
                                 Catálogo
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link 
-                                className={`nav-link btn btn-link${location.pathname === '/admin' ? ' active' : ''}`}
-                                to="/admin"
-                            >
-                                Administración
-                            </Link>
-                        </li>
+                  
                     </ul>
                     <button 
                         className="btn btn-outline-primary position-relative"

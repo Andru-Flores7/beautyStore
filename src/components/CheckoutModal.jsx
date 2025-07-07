@@ -76,7 +76,7 @@ const CheckoutModal = ({ show, onHide, onSuccess, showToast }) => {
                 <div className="modal-content">
                     <div className="modal-header bg-success text-white">
                         <h5 className="modal-title">
-                            <i className="bi bi-person-fill me-2"></i>Datos de Envío
+                            <i className="bi bi-person-fill me-2"></i>Datos del Cliente
                         </h5>
                         <button 
                             type="button" 
@@ -111,7 +111,7 @@ const CheckoutModal = ({ show, onHide, onSuccess, showToast }) => {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="address" className="form-label">Dirección de Envío *</label>
+                                <label htmlFor="address" className="form-label">Dirección *</label>
                                 <textarea 
                                     className="form-control" 
                                     id="address"

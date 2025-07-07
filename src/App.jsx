@@ -4,10 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
-import './App.css'
 import Navbar from './components/Navbar'
 import ProductCatalog from './components/ProductCatalog'
-import AdminPanel from './components/AdminPanel'
+
 import CartModal from './components/CartModal'
 import CheckoutModal from './components/CheckoutModal'
 import SuccessModal from './components/SuccessModal'
@@ -41,32 +40,6 @@ function App() {
     setShowSuccessModal(true)
   }
 
-  const handleConfirm = () => {
-    // Reemplaza estos con tus propios estados/props
-    const telefono = '543884636451'
-    const nombreCliente = formData.nombre
-    const emailCliente = formData.email
-    const direccionCliente = formData.direccion
-    const productos = cartItems.map(item =>
-      `• ${item.product.name} x${item.quantity} - ${formatPrice(item.product.price * item.quantity)}`
-    ).join('\n')
-    const total = formatPrice(getTotal())
-
-    const mensaje = 
-      `¡Hola! Quiero hacer un pedido:\n\n` +
-      `*Datos del cliente:*\n` +
-      `Nombre: ${nombreCliente}\n` +
-      `Email: ${emailCliente}\n` +
-      `Dirección: ${direccionCliente}\n\n` +
-      `*Pedido:*\n${productos}\n\n` +
-      `*Total:* ${total}`
-
-    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`
-    window.open(url, '_blank')
-    // Opcional: puedes cerrar el modal aquí si lo deseas
-    onHide()
-  }
-
   return (
     <ProductProvider>
       <CartProvider>
@@ -77,7 +50,7 @@ function App() {
               <main className="container-fluid">
                 <Routes>
                   <Route path="/" element={<ProductCatalog showToast={showToast} />} />
-                  <Route path="/admin" element={<AdminPanel showToast={showToast} />} />
+                  {/* <Route path="/admin" element={<AdminPanel showToast={showToast} />} /> */}
                 </Routes>
               </main>
             </div>

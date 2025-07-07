@@ -1,4 +1,5 @@
 export const initialProducts = [
+    // Maquillaje
     {
         id: 1,
         name: "Base de Maquillaje Hidratante",
@@ -9,38 +10,6 @@ export const initialProducts = [
     },
     {
         id: 2,
-        name: "Sérum Vitamina C Antioxidante",
-        price: 45.50,
-        category: "Cuidado de la Piel",
-        image: "https://images.pexels.com/photos/3762800/pexels-photo-3762800.jpeg?auto=compress&cs=tinysrgb&w=500",
-        description: "Sérum concentrado con vitamina C pura que ilumina, protege y rejuvenece la piel. Ideal para todo tipo de pieles."
-    },
-    {
-        id: 3,
-        name: "Champú Reparador Argán",
-        price: 22.00,
-        category: "Cuidado del Cabello",
-        image: "https://images.pexels.com/photos/3762452/pexels-photo-3762452.jpeg?auto=compress&cs=tinysrgb&w=500",
-        description: "Champú enriquecido con aceite de argán que repara y nutre el cabello dañado, dejándolo suave y brillante."
-    },
-    {
-        id: 4,
-        name: "Perfume Floral Elegante",
-        price: 75.99,
-        category: "Fragancias",
-        image: "https://images.pexels.com/photos/1961795/pexels-photo-1961795.jpeg?auto=compress&cs=tinysrgb&w=500",
-        description: "Fragancia floral sofisticada con notas de jazmín, rosa y sándalo. Perfecta para ocasiones especiales."
-    },
-    {
-        id: 5,
-        name: "Crema Corporal Hidratante",
-        price: 18.75,
-        category: "Cuidado Corporal",
-        image: "https://images.pexels.com/photos/3762874/pexels-photo-3762874.jpeg?auto=compress&cs=tinysrgb&w=500",
-        description: "Crema corporal de absorción rápida con manteca de karité y aceite de coco. Nutre profundamente la piel."
-    },
-    {
-        id: 6,
         name: "Paleta de Sombras Neutras",
         price: 35.25,
         category: "Maquillaje",
@@ -48,19 +17,62 @@ export const initialProducts = [
         description: "Paleta de 12 sombras en tonos neutros perfectos para crear looks desde naturales hasta dramáticos."
     },
     {
-        id: 7,
-        name: "Mascarilla Facial Purificante",
-        price: 16.50,
-        category: "Cuidado de la Piel",
-        image: "https://images.pexels.com/photos/3785147/pexels-photo-3785147.jpeg?auto=compress&cs=tinysrgb&w=500",
-        description: "Mascarilla de arcilla que purifica los poros y elimina impurezas. Ideal para pieles grasas y mixtas."
+        id: 3,
+        name: "Máscara de Pestañas Volumen",
+        price: 19.99,
+        category: "Maquillaje",
+        image: "https://images.pexels.com/photos/3373745/pexels-photo-3373745.jpeg?auto=compress&cs=tinysrgb&w=500",
+        description: "Máscara que aporta volumen y definición a las pestañas sin grumos."
+    },
+    // Insumos de Uñas
+    {
+        id: 4,
+        name: "Esmalte Gel Rojo",
+        price: 12.50,
+        category: "Insumos de Uñas",
+        image: "https://images.pexels.com/photos/209817/pexels-photo-209817.jpeg?auto=compress&cs=tinysrgb&w=500",
+        description: "Esmalte en gel de larga duración, color rojo intenso y brillante."
     },
     {
+        id: 5,
+        name: "Kit de Manicura Profesional",
+        price: 45.00,
+        category: "Insumos de Uñas",
+        image: "https://images.pexels.com/photos/3997389/pexels-photo-3997389.jpeg?auto=compress&cs=tinysrgb&w=500",
+        description: "Kit completo con limas, cortauñas, empujador y separadores de dedos."
+    },
+    // Insumos de Pestañas
+    {
+        id: 6,
+        name: "Pestañas Postizas Naturales",
+        price: 15.00,
+        category: "Insumos de Pestañas",
+        image: "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=500",
+        description: "Pestañas postizas de aspecto natural, reutilizables y ligeras."
+    },
+    {
+        id: 7,
+        name: "Pegamento para Pestañas Transparente",
+        price: 8.99,
+        category: "Insumos de Pestañas",
+        image: "https://images.pexels.com/photos/3993448/pexels-photo-3993448.jpeg?auto=compress&cs=tinysrgb&w=500",
+        description: "Pegamento de secado rápido y larga duración, invisible al secar."
+    },
+    // Artículos Varios
+    {
         id: 8,
-        name: "Acondicionador Reparador",
-        price: 24.99,
-        category: "Cuidado del Cabello",
-        image: "https://images.pexels.com/photos/3762873/pexels-photo-3762873.jpeg?auto=compress&cs=tinysrgb&w=500",
-        description: "Acondicionador intensivo que repara y fortalece el cabello desde la raíz hasta las puntas."
+        name: "Neceser de Viaje",
+        price: 22.00,
+        category: "Artículos Varios",
+        image: "https://images.pexels.com/photos/3758131/pexels-photo-3758131.jpeg?auto=compress&cs=tinysrgb&w=500",
+        description: "Neceser compacto y resistente, ideal para organizar productos de belleza en viajes."
+    },
+    {
+        id: 9,
+        name: "Espejo con Luz LED",
+        price: 30.00,
+        category: "Artículos Varios",
+        image: "https://images.pexels.com/photos/3758132/pexels-photo-3758132.jpeg?auto=compress&cs=tinysrgb&w=500",
+        description: "Espejo portátil con luz LED regulable, perfecto para maquillaje y cuidado personal."
     }
-];
+]
