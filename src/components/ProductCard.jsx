@@ -11,19 +11,19 @@ const ProductCard = ({ product, onAddToCart }) => {
         <div className="card product-card h-100 fade-in">
             <div className="product-img-container">
                 <img
-                    src={product.image}
-                    alt={product.name}
+                    src={product.imagen}
+                    alt={product.nombre || "Producto sin nombre"}
                     className="product-img"
                     onError={handleImageError}
                 />
             </div>
             <div className="card-body d-flex flex-column">
-                <span className={`product-category bg-category-${product.category.replace(/\s/g, '').toLowerCase()}`}>{product.category}</span>
-                <h5 className="card-title">{product.name}</h5>
-                <p className="card-text text-muted flex-grow-1">{product.description}</p>
+                <span className={`product-category bg-category-${product.categoria.replace(/\s/g, '').toLowerCase()}`}>{product.categoria || "Sin Categoria"}</span>
+                <h5 className="card-title">{product.nombre || "S/N"}</h5>
+                
                 <div className="mt-auto">
                     <div className="d-flex justify-content-between align-items-center mb-3">
-                        <span className="product-price">{formatPrice(product.price)}</span>
+                        <span className="product-price">{formatPrice(product.precio)}</span>
                     </div>
                     <button 
                         className="btn btn btn-primary w-100"

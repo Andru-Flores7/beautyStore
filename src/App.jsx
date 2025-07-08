@@ -16,6 +16,7 @@ import { CartProvider } from './context/CartContext'
 import Footer from './components/Footer'
 
 
+
 function App() {
   const [showCartModal, setShowCartModal] = useState(false)
   const [showCheckoutModal, setShowCheckoutModal] = useState(false)
@@ -45,6 +46,7 @@ function App() {
       <CartProvider>
         <Router>
           <div className="App">
+            
             <Navbar onCartClick={() => setShowCartModal(true)} />
             <div className="main-content">
               <main className="container-fluid">
