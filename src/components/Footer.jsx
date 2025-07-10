@@ -15,7 +15,7 @@ const Footer = () => (
         </a>
       </div>
       <small>
-        &copy; {new Date().getFullYear()} Beauty Store · Hecho por Andru <i className="bi bi-eyeglasses"></i>
+        &copy; {new Date().getFullYear()} Lashess Elegance Studio· Hecho por Andru <i className="bi bi-eyeglasses"></i>
       </small>
     </div>
   </footer>

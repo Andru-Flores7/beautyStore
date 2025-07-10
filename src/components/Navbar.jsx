@@ -15,7 +15,7 @@ const Navbar = ({ onCartClick }) => {
                     to="/"
                     style={{ cursor: 'pointer' }}
                 >
-                    <i className="bi bi-gem me-2"></i>Beauty Store
+                    <i className="bi bi-gem me-2"></i>Lashess Elegance Studio
                 </Link>
                 <button 
                     className="navbar-toggler" 
