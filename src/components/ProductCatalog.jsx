@@ -6,7 +6,7 @@ import ProductCard from './ProductCard'
 const categoriasFijas = [
   'Todos',
   'Insumos De Uñas',
-  'Insumos Para El Cabello',
+  'Insumos De Pestañas',
   'Productos Varios',
   'Maquillaje'
 ]
